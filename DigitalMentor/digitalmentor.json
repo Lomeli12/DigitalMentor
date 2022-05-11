@@ -1,0 +1,17 @@
+﻿{
+  "Author": "Lomeli",
+  "Name": "Digital Mentor",
+  "Punchline": "Displays tips for dungeon and trial mechanics.",
+  "Description": "Display tips for dungeon and trial mechanics.\nUse /pdigimentor to open options",
+  "InternalName": "digitalMentor",
+  "ApplicableVersion": "any",
+  "Tags": [
+    "digital",
+    "mentor",
+    "tips",
+    "dungeon",
+    "trials",
+    "mechanics",
+    "help"
+  ]
+}
