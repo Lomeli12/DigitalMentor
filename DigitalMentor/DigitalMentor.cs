@@ -4,7 +4,7 @@ using DigitalMentor.Util;
 namespace DigitalMentor; 
 
 public class DigitalMentor : IDalamudPlugin {
-    public string Name => "Digital Mentor";
+    public string Name => Constants.pluginName;
     
     public DalamudPluginInterface pluginInterface { get; private set;  }
 
