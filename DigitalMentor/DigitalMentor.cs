@@ -1,6 +1,7 @@
-using Dalamud.Game.Command;
+﻿using Dalamud.Game.Command;
 using Dalamud.Plugin;
 using DigitalMentor.Util;
+using DigitalMentor.Util.Localization;
 
 namespace DigitalMentor; 
 
@@ -18,6 +19,9 @@ public class DigitalMentor : IDalamudPlugin {
 
         this.config = (DigitalMentorConfig) pluginInterface.GetPluginConfig() ?? new DigitalMentorConfig();
         this.config.init(this, pluginInterface);
+        
+        I18n.setupLocalization(this);
+
         Services.Commands.AddHandler(Constants.commandName, new CommandInfo(handleDMCommand) {
             HelpMessage = $@"{Constants.commandName} help - Display help options"
         });
