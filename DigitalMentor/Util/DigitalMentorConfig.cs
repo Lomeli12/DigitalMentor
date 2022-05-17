@@ -4,6 +4,7 @@ using Dalamud.Plugin;
 
 namespace DigitalMentor.Util;
 
+[Serializable]
 public class DigitalMentorConfig : IPluginConfiguration {
 
     [NonSerialized] private DalamudPluginInterface pluginInterface;
