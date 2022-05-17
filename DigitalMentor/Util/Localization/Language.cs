@@ -2,26 +2,29 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace DigitalMentor.Util.Localization; 
+namespace DigitalMentor.Util.Localization;
 
 public class Language {
     private IDictionary<string, string> entries { get; set; }
     public string lang { get; private set; }
 
-    public Language(string lang, string path) {
+    public Language(string lang) {
         this.lang = lang;
-        loadLang(path);
+        entries = new Dictionary<string, string>();
     }
 
-    protected void loadLang(string path) {
-        if (!string.IsNullOrWhiteSpace(path) && File.Exists(path)) {
-            var text = File.ReadAllText(path);
-#pragma warning disable CS8601
-            entries = JsonConvert.DeserializeObject<IDictionary<string, string>>(text);
-#pragma warning restore CS8601
-        }
+    protected internal void loadLang(string path) {
+        var localPath = Path.Combine(path, $"{lang}.json");
+        if (!File.Exists(localPath)) return;
 
-        // Just don't want to deal with multiple null checks.
-        entries ??= new Dictionary<string, string>();
+        var text = File.ReadAllText(localPath);
+        entries = JsonConvert.DeserializeObject<IDictionary<string, string>>(text)!;
+    }
+
+    protected internal string localize(string key, params object[] args) {
+        var output = entries.ContainsKey(key) ? entries[key] : key;
+        if (args.Length > 0)
+            output = string.Format(output, args);
+        return output;
     }
 }

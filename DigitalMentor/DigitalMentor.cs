@@ -17,8 +17,8 @@ public class DigitalMentor : IDalamudPlugin {
 
         this.pluginInterface = pluginInterface;
 
-        this.config = (DigitalMentorConfig) pluginInterface.GetPluginConfig() ?? new DigitalMentorConfig();
-        this.config.init(this, pluginInterface);
+        config = (DigitalMentorConfig) pluginInterface.GetPluginConfig() ?? new DigitalMentorConfig();
+        config.init(this, pluginInterface);
         
         I18n.setupLocalization(this);
 
