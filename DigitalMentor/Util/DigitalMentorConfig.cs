@@ -13,6 +13,7 @@ public class DigitalMentorConfig : IPluginConfiguration {
     
     public int Version { get; set; } = 3;
     public string language;
+    public bool enableMentor = true;
 
     public void init(DigitalMentor digitalMentor, DalamudPluginInterface pluginInterface) {
         this.digitalMentor = digitalMentor;

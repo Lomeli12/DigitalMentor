@@ -27,6 +27,7 @@ public class DigitalMentor : IDalamudPlugin {
         });
     }
 
+    //TODO: Localize arguments?
     private void handleDMCommand(string command, string args) {
         var arglist = args.Split(' ');
         if (arglist.Length == 0) {
