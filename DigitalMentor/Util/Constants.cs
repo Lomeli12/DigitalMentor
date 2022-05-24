@@ -2,5 +2,5 @@
 
 public class Constants {
     public static readonly string pluginName = "Digital Mentor";
-    public static readonly string commandName = "/pdigimentor";
+    public static readonly string commandName = "/digimentor";
 }
