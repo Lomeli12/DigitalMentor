@@ -27,7 +27,11 @@ public class DigitalMentor : IDalamudPlugin {
         I18n.setupLocalization(this);
 
         Services.Commands.AddHandler(Constants.commandName, new CommandInfo(handleDMCommand) {
-            HelpMessage = $@"{Constants.commandName} help - Display help options"
+            HelpMessage = $"{I18n.localize("plugin.help.none")}\n" +
+                          $"   help, ?  -  {I18n.localize("plugin.help.help")}\n" +
+                          $"   enable, on, show  -  {I18n.localize("plugin.help.enable")}\n" +
+                          $"   disable, off, hide  -  {I18n.localize("plugin.help.disable")}\n" +
+                          $"   options, settings  -  {I18n.localize("plugin.help.options")}"
         });
     }
 
@@ -61,8 +65,8 @@ public class DigitalMentor : IDalamudPlugin {
                     break;
                 case "options":
                 case "settings":
-                    Chat.queueChat(true, "config.window.open_settings");
                     options.settingsVisible = !options.settingsVisible;
+                    Chat.queueChat(true, options.settingsVisible ? "config.window.open_settings" : "config.window.close_settings");
                     break;
             }
         }

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
+using Dalamud.Logging;
 using Newtonsoft.Json;
 
 namespace DigitalMentor.Util.Localization;
@@ -14,11 +16,22 @@ public class Language {
     }
 
     protected internal void loadLang(string path) {
-        var localPath = Path.Combine(path, $"{lang}.json");
-        if (!File.Exists(localPath)) return;
+        var localPath = path + $"{lang}.json";
+        PluginLog.Debug($"Localization Path: {localPath}");
 
-        var text = File.ReadAllText(localPath);
-        entries = JsonConvert.DeserializeObject<IDictionary<string, string>>(text)!;
+        var text = readEmbeddedStream(localPath);
+        var readEntries = JsonConvert.DeserializeObject<IDictionary<string, string>>(text);
+        if (readEntries is not {Count: > 0}) return;
+        entries.Clear();
+        foreach (var entry in readEntries)
+            entries.Add(entry.Key, entry.Value);
+    }
+
+    private static string readEmbeddedStream(string path) {
+        var resourceStream = Assembly.GetCallingAssembly().GetManifestResourceStream(path);
+        if (resourceStream == null) return "";
+        using var reader = new StreamReader(resourceStream);
+        return reader.ReadToEnd();
     }
 
     protected internal string localize(string key, params object[] args) {

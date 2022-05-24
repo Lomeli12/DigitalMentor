@@ -1,8 +1,14 @@
 {
     "plugin.name" : "Digital Mentor",
+    "plugin.help.none": "Toggle Digital Mentor",
+    "plugin.help.help": "Display help options",
+    "plugin.help.options": "Open settings window",
+    "plugin.help.enable": "Enable Digital Mentor",
+    "plugin.help.disable": "Disable Digital Mentor",
     "config.mentor.enable" : "Digital Mentor enabled.",
     "config.mentor.disable" : "Digital Mentor disabled.",
     "config.window.title" : "Digital Mentor Settings",
     "config.window.open_settings" : "Opening Digital Mentor settings window.",
+    "config.window.close_settings" : "Closing Digital Mentor settings window.",
     "config.window.enable_mentor" : "Enable Digital Mentor"
 }

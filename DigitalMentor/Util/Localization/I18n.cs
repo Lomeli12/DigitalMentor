@@ -1,5 +1,4 @@
 ﻿using Dalamud;
-using Dalamud.Logging;
 
 namespace DigitalMentor.Util.Localization;
 
@@ -22,14 +21,15 @@ public class I18n {
     private static void loadLocalization(DigitalMentor plugin) {
         currentLang = new Language(plugin.config.language);
         enLang = new Language("en");
-        var locDir = Services.PluginInterface.GetPluginLocDirectory();
-        if (string.IsNullOrWhiteSpace(locDir)) return;
+
+        var assemblyName = plugin.GetType().Assembly.GetName().Name;
+        var locDir = $"{assemblyName}.assets.loc.";
         
-        PluginLog.Debug($"Local Dir: {locDir}");
         currentLang.loadLang(locDir);
         enLang.loadLang(locDir);
     }
 
+    // Will always fallback to english if it can't find the correct localization file
     public static string localize(string key, params object[] args) {
         var output = currentLang.localize(key, args);
         return output.Equals(key) ? enLang.localize(key, args) : output;
