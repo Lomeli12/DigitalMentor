@@ -11,14 +11,13 @@ public class DigitalMentorConfig : IPluginConfiguration {
 
     [NonSerialized] private DigitalMentor digitalMentor;
     
-    public int Version { get; set; } = 3;
+    public int Version { get; set; } = 0;
     public string language;
     public bool enableMentor = true;
 
     public void init(DigitalMentor digitalMentor, DalamudPluginInterface pluginInterface) {
         this.digitalMentor = digitalMentor;
         this.pluginInterface = pluginInterface;
-        
     }
 
     public void save() {
