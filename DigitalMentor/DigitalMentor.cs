@@ -1,4 +1,4 @@
-using Dalamud.Game.Command;
+﻿using Dalamud.Game.Command;
 using Dalamud.Plugin;
 using DigitalMentor.Util;
 using DigitalMentor.Util.Localization;
@@ -36,17 +36,24 @@ public class DigitalMentor : IDalamudPlugin {
         var arglist = args.Split(' ');
         if (arglist.Length == 0) {
             //TODO: Toggle tips on/off
+            config.enableMentor = !config.enableMentor;
+            config.save();
+            Chat.queueChat(true, config.enableMentor ? "config.mentor.enable" : "config.mentor.disable");
         } else {
             switch (arglist[0]) {
                 case "enable":
                 case "on":
                 case "show":
-                    //TODO: Toggle tips on
+                    config.enableMentor = true;
+                    config.save();
+                    Chat.queueChat(true, "config.mentor.enable");
                     break;
                 case "disable":
                 case "off":
                 case "hide":
-                    //TODO: Toggle tips off
+                    config.enableMentor = false;
+                    config.save();
+                    Chat.queueChat(true,"config.mentor.disable");
                     break;
                 case "help":
                 case "?":
