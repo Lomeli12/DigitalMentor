@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.Command;
+using Dalamud.Game.Command;
 using Dalamud.Plugin;
 using DigitalMentor.Util;
 using DigitalMentor.Util.Localization;
@@ -11,6 +11,8 @@ public class DigitalMentor : IDalamudPlugin {
     public DalamudPluginInterface pluginInterface { get; private set;  }
 
     public DigitalMentorConfig config { get; private set; }
+    
+    public OptionsUI options { get; private set; }
 
     public DigitalMentor(DalamudPluginInterface pluginInterface) {
         pluginInterface.Create<Services>();
@@ -18,6 +20,8 @@ public class DigitalMentor : IDalamudPlugin {
         this.pluginInterface = pluginInterface;
 
         config = (DigitalMentorConfig) pluginInterface.GetPluginConfig() ?? new DigitalMentorConfig();
+        options = new OptionsUI(this);
+        
         config.init(this, pluginInterface);
         
         I18n.setupLocalization(this);
