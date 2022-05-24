@@ -54,14 +54,16 @@ public class DigitalMentor : IDalamudPlugin {
                     break;
                 case "options":
                 case "settings":
-                    Services.Chat.Print("Opening options window.");
+                    Chat.queueChat(true, "config.window.open_settings");
+                    options.settingsVisible = !options.settingsVisible;
                     break;
             }
         }
-        Services.Chat.UpdateQueue();
+        Chat.popChat();
     }
     
     public void Dispose() {
         Services.Commands.RemoveHandler(Constants.commandName);
+        options.Dispose();
     }
 }
